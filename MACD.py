@@ -68,13 +68,15 @@ def findMACD(data):
     data['MACD'] = arrayMACD
     data['Signal'] = arraySignal
 
+    '''
     # Plot Test
-
     print(arrayMACD)
     print(arraySignal)
     plt.plot(arrayMACD)
     plt.plot(arraySignal)
     plt.show()
+    '''
+
     # Return the dataframe
     return data
 
@@ -173,7 +175,7 @@ def SMA(start, end, stock, short_sma, long_sma, plot=False):
         mpf.plot(df, type='ohlc', figratio=(16, 6),
                  mav=(short_sma, long_sma),
                  # volume=True, title= str(stock),
-                 style='mike')
+                 style='charles')
 
     # print(df_updated)
     return calcReturn(percentChange, df_updated)
@@ -186,8 +188,8 @@ def MACD(start, end, stock):
     return calcReturn(percentChange, df)
 
 def main():
-    start = ['2010-01-01', '2020-01-01']
-    end = ['2020-01-01', '2020-03-01']
+    start = ['2010-01-01']
+    end = ['2020-01-01']
     stocks = ['SPY', 'VGT', 'XLV']
     short_sma = [10, 20, 30]
     long_sma = [50, 60, 70, 80]

@@ -89,8 +89,8 @@ def SMA(start, end, stock, short_sma, long_sma, plot = False):
     return calcReturn(percentChange, df_updated)
 
 def main():
-    start = '2010-01-01'
-    end = '2020-01-01'
+    start = ['2010-01-01']
+    end = ['2020-01-01']
     stocks = ['SPY', 'VGT', 'XLV']
     short_sma = 20
     long_sma = 40

@@ -22,7 +22,7 @@ def findRSI (data, time_window):
     up_chg_avg = up_chg.ewm(com=time_window-1 , min_periods=time_window).mean()
     
     # down change 
-    down_chg[diff < 0] = diff[diff < 0]  
+    down_chg[diff < 0] = diff[diff < 0]
     down_chg_avg = down_chg.ewm(com=time_window-1 , min_periods=time_window).mean()
     
     # rsi
@@ -45,14 +45,14 @@ def tradeRSI(df, high, low):
         # buy
         if(rsi[i] < low):                          
             if(position == 0):
-                buyP = close   # buy price
-                position = 1   # turn position
+                position = 1  # buy position
+                buyP = close  # buy price
            
         # sell    
         elif(rsi[i] > high):
-            if(position == 1):   # have a position in down trend
-                position = 0     # sell position
-                sellP = close    # sell price
+            if(position == 1):  # have a position in down trend
+                position = 0  # sell position
+                sellP = close  # sell price
                 perc = (sellP/buyP-1)*100
                 percentChange.append(perc)                      
         
@@ -104,16 +104,16 @@ def RSI(start, end, stock, low, high, plot = False):
     return calcReturn(percentChange, df)
 
 def main():
-    start = '2010-01-01'
-    end = '2020-01-01'
+    start = ['2010-01-01']
+    end = ['2020-01-01']
     stocks = ['SPY', 'VGT', 'XLV']
     short_sma = 20
     long_sma = 40
-    rsi_low = 40
-    rsi_high = 60
+    rsi_low = 30
+    rsi_high = 70
 
-    results = SMA(start[0], end[0], 'VGT', 20, 50, True)  
-    #results = RSI(start[0], end[0], stocks[2], 30, 70)
+    #results = SMA(start[0], end[0], 'VGT', 20, 50, True)
+    results = RSI(start[0], end[0], stocks[2], rsi_low, rsi_high, True)
     print(results)
 
     return 0
