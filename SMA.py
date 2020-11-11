@@ -81,10 +81,10 @@ def SMA(start, end, stock, short_sma, long_sma, plot = False):
     percentChange = tradeSMA(df_updated, short_sma, long_sma)
 
     if plot == True:
-        mpf.plot(df, type = 'line',figratio=(16,6), 
-         mav=(short_sma,long_sma), 
-         #volume=True, title= str(stock), 
-         style='charles')
+        mpf.plot(df, type = 'line',figratio=(16,6),
+         mav=(short_sma, long_sma),
+         #volume=True,
+         title=str('SMA (50, 200) - SPY'), style='charles')
     
     return calcReturn(percentChange, df_updated)
 
@@ -92,13 +92,10 @@ def main():
     start = ['2010-01-01']
     end = ['2020-01-01']
     stocks = ['SPY', 'VGT', 'XLV']
-    short_sma = 20
-    long_sma = 40
-    rsi_low = 40
-    rsi_high = 60
+    short_sma = 50
+    long_sma = 200
 
-    results = SMA(start[0], end[0], 'VGT', 20, 50, True)  
-    #results = RSI(start[0], end[0], stocks[2], 30, 70)
+    results = SMA(start[0], end[0], stocks[0], short_sma, long_sma, True)
     print(results)
 
     return 0

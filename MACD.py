@@ -68,14 +68,14 @@ def findMACD(data):
     data['MACD'] = arrayMACD
     data['Signal'] = arraySignal
 
-    '''
-    # Plot Test
-    print(arrayMACD)
-    print(arraySignal)
-    plt.plot(arrayMACD)
-    plt.plot(arraySignal)
+    fig = plt.figure(num=1, clear=True)
+    ax = fig.add_subplot(1, 1, 1)
+    ax.plot(arrayMACD, label='MACD')
+    ax.plot(arraySignal, label='Signal Line')
+    ax.legend()
+    ax.set(title='MACD (12, 26, 9) - SPY', ylabel='Indicator Value', xlim=(0, 2516))
+    ax.set_xticklabels(['2010-Jan-04', '2011-Dec-27', '2013-Dec-23', '2015-Dec-17', '2017-Dec-12', '2019-Dec-09'])
     plt.show()
-    '''
 
     # Return the dataframe
     return data
@@ -174,8 +174,8 @@ def SMA(start, end, stock, short_sma, long_sma, plot=False):
     if plot == True:
         mpf.plot(df, type='ohlc', figratio=(16, 6),
                  mav=(short_sma, long_sma),
-                 # volume=True, title= str(stock),
-                 style='charles')
+                 # volume=True,
+                 title= str('MACD (12, 26, 9) - SPY'), style='charles')
 
     # print(df_updated)
     return calcReturn(percentChange, df_updated)
@@ -194,6 +194,6 @@ def main():
     short_sma = [10, 20, 30]
     long_sma = [50, 60, 70, 80]
     print(MACD(start[0], end[0], stocks[2]))
-    SMA(start[0], end[0], stocks[0], short_sma[0], long_sma[0], True)
+    SMA(start[0], end[0], stocks[0], short_sma[0], long_sma[0], False)
 
 main()

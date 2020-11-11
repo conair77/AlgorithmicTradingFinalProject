@@ -96,10 +96,24 @@ def RSI(start, end, stock, low, high, plot = False):
 
     # need to change lines bc mav is moving average
     if plot == True:
-        mpf.plot(df, type = 'ohlc',figratio=(16,6), 
-         mav=(low, high), 
-         #volume=True, title= str(stock), 
-         style='charles')
+        lowarray = [low] * len(df.index)
+        higharray = [high] * len(df.index)
+        rsi = df['RSI']
+        rsiarray = []
+        datearray = []
+        for i in df.index:
+            rsiarray.append(rsi[i])
+            datearray.append(0)
+
+        fig = plt.figure(num=1, clear=True)
+        ax = fig.add_subplot(1, 1, 1)
+        ax.plot(rsiarray, label='Oscillator')
+        ax.plot(higharray, 'r-', label='Overbought Threshold')
+        ax.plot(lowarray, 'g-', label='Oversold Threshold')
+        ax.legend()
+        ax.set(title='RSI (30, 70) - SPY', ylabel='Indicator Value', xlim=(0, 2516), ylim=(0, 100))
+        ax.set_xticklabels(['2010-Jan-04', '2011-Dec-27', '2013-Dec-23', '2015-Dec-17', '2017-Dec-12', '2019-Dec-09'])
+        plt.show()
     
     return calcReturn(percentChange, df)
 
@@ -107,13 +121,10 @@ def main():
     start = ['2010-01-01']
     end = ['2020-01-01']
     stocks = ['SPY', 'VGT', 'XLV']
-    short_sma = 20
-    long_sma = 40
     rsi_low = 30
     rsi_high = 70
 
-    #results = SMA(start[0], end[0], 'VGT', 20, 50, True)
-    results = RSI(start[0], end[0], stocks[2], rsi_low, rsi_high, True)
+    results = RSI(start[0], end[0], stocks[0], rsi_low, rsi_high, True)
     print(results)
 
     return 0
